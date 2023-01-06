@@ -29,6 +29,23 @@ namespace ContactBook
 			return _contacts;
 		}
 
+		// Create new contact
+		public Person AddContact(Person person)
+		{
+			try
+			{
+                _contacts.Add(person);
+                SerializeAndSave();
+                return person;
+            }
+			catch (Exception ex)
+			{
+				Console.WriteLine("Det gick inte att lägga till denna person. Försök igen.");
+			}
+
+			return null;
+		}
+
         // Save and serialize JSON object
         private void SerializeAndSave()
 		{
