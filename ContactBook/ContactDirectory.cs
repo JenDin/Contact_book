@@ -54,6 +54,25 @@ namespace ContactBook
 			return null;
 		}
 
+		// Update a contact
+		public Person UpdateContact(int index, string firstName, string lastName, string phoneNo, string streetName, string streetNo)
+		{
+			try
+			{
+				var person = GetContactByIndex(index);
+				person.Address.Update(streetName, streetNo);
+				person.Update(firstName, lastName, phoneNo);
+				SerializeAndSave();
+				return person;
+			}
+			catch (Exception ex)
+			{
+                Console.WriteLine("Det gick inte att uppdatera denna kontakt. Försök igen.", ex);
+            }
+
+			return null;
+		}
+
 		// Delete a contact
 		public int DeleteContact(int index)
 		{
