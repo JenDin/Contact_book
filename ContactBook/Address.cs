@@ -38,6 +38,12 @@ namespace ContactBook
             }
         }
 
+        // Override the default output
+        public override string ToString()
+        {
+            var message = $"{StreetName} {StreetNo}";
+            return message;
+        }
     }
 }
 

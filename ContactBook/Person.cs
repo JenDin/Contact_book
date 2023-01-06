@@ -51,5 +51,12 @@ namespace ContactBook
                 PhoneNo = phoneNo;
             }
         }
+
+        // Override the default output
+        public override string ToString()
+        {
+            var message = $"{FirstName} {LastName} // Tel: {PhoneNo} // Adress: {Address} ";
+            return message;
+        }
     }
 }
