@@ -40,10 +40,26 @@ namespace ContactBook
             }
 			catch (Exception ex)
 			{
-				Console.WriteLine("Det gick inte att lägga till denna person. Försök igen.");
+				Console.WriteLine("Det gick inte att lägga till denna kontakt. Försök igen.", ex);
 			}
 
 			return null;
+		}
+
+		// Delete a contact
+		public int DeleteContact(int index)
+		{
+			try
+			{
+				_contacts.RemoveAt(index);
+				SerializeAndSave();
+				return index;
+			}
+			catch (Exception ex)
+			{
+                Console.WriteLine("Detta index existerar inte. Försök igen.", ex);
+            }
+			return 0;
 		}
 
         // Save and serialize JSON object
