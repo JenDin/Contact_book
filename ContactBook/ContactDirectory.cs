@@ -29,6 +29,14 @@ namespace ContactBook
 			return _contacts;
 		}
 
+		// Get a specific contact by index
+
+		public Person GetContactByIndex(int index)
+		{
+			var person = _contacts[index];
+			return person;
+		}
+
 		// Create new contact
 		public Person AddContact(Person person)
 		{
