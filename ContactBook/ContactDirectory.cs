@@ -23,6 +23,12 @@ namespace ContactBook
 			}
 		}
 
+		// Get all contacts
+		public List<Person> GetContacts()
+		{
+			return _contacts;
+		}
+
         // Save and serialize JSON object
         private void SerializeAndSave()
 		{
