@@ -24,6 +24,20 @@ namespace ContactBook
             StreetNo = streetNo;
         }
 
+        // Update address
+        public void Update(string streetName, string streetNo)
+        {
+            if(!string.IsNullOrEmpty(streetName))
+            {
+                StreetName = streetName;
+            }
+
+            if(!string.IsNullOrEmpty(streetNo))
+            {
+                StreetNo = streetNo;
+            }
+        }
+
     }
 }
 

@@ -32,5 +32,24 @@ namespace ContactBook
             PhoneNo = phoneNo;
             Address = address;
         }
+
+        // Update person
+        public void Update(string firstName, string lastName, string phoneNo)
+        {
+            if (!string.IsNullOrEmpty(firstName))
+            {
+                FirstName = firstName;
+            }
+
+            if (!string.IsNullOrEmpty(lastName))
+            {
+                LastName = lastName;
+            }
+
+            if (!string.IsNullOrEmpty(phoneNo))
+            {
+                PhoneNo = phoneNo;
+            }
+        }
     }
 }
