@@ -32,13 +32,11 @@ namespace ContactBook
 		}
 
 		// Get all contacts with a specific name
-		public List<Person> GetContactsBySearch(string firstName)
+		public List<Person> GetContactsByName(string firstName)
 		{
-            var searchResult = new List<Person>();
+            var searchResult = _contacts.Where(x => x.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase)).ToList();
 
-			searchResult = _contacts.Where(x => x.FirstName == firstName).ToList();
-
-			return searchResult;
+            return searchResult;
 		}
 
 		// Get a specific contact by index

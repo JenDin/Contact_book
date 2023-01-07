@@ -31,15 +31,7 @@ while(true)
     switch (input)
     {
         case '1':
-            Console.WriteLine("Ange ett förnamn:");
-            string searchInput = Console.ReadLine();
-            var people = contactDirectory.GetContactsBySearch(searchInput);
-
-            foreach (var person in people)
-            {
-                Console.WriteLine($"Search result: {person}");
-                Console.Read();
-            }
+            GetContactsByName();
             break;
         case '2':
             AddNewContact();
@@ -54,6 +46,20 @@ while(true)
             Environment.Exit(0);
             break;
     }
+}
+
+// Get contacts by name
+void GetContactsByName()
+{
+    Console.WriteLine("Ange ett förnamn:");
+    string searchInput = Console.ReadLine();
+    var people = contactDirectory.GetContactsByName(searchInput);
+
+    foreach (var person in people)
+    {
+        Console.WriteLine($"Search result: {person.ToString()}");
+    }
+    Console.Read();
 }
 
 /*
