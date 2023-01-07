@@ -1,4 +1,5 @@
-﻿using ContactBook;
+﻿using System.Collections.Generic;
+using ContactBook;
 
 // Create an instance of the ContactDirectory Class
 ContactDirectory contactDirectory = new ContactDirectory();
@@ -6,12 +7,13 @@ ContactDirectory contactDirectory = new ContactDirectory();
 while(true)
 {
     Console.Clear();
-    Console.WriteLine("Gula Sidorna i Göteborg");
-    Console.WriteLine("* Tryck 1 för att lägga till en ny kontakt");
-    Console.WriteLine("* Tryck 2 för att redigera och uppdatera en adress");
-    Console.WriteLine("* Tryck 3 för att radera en person och adress");
+    Console.WriteLine("* Tryck 1 för att söka upp upp kontakter efter förnamn");
+    Console.WriteLine("* Tryck 2 för att lägga till en ny kontakt");
+    Console.WriteLine("* Tryck 3 för att redigera och uppdatera en kontakt");
+    Console.WriteLine("* Tryck 4 för att radera en kontakt");
     Console.WriteLine("* Tryck X för att avsluta programmet");
     Console.WriteLine("------------------------------");
+    Console.WriteLine("Kontaktlista:");
 
     var contacts = contactDirectory.GetContacts();
 
@@ -29,12 +31,23 @@ while(true)
     switch (input)
     {
         case '1':
-            AddNewContact();
+            Console.WriteLine("Ange ett förnamn:");
+            string searchInput = Console.ReadLine();
+            var people = contactDirectory.GetContactsBySearch(searchInput);
+
+            foreach (var person in people)
+            {
+                Console.WriteLine($"Search result: {person}");
+                Console.Read();
+            }
             break;
         case '2':
-            EditAndUpdateContact();
+            AddNewContact();
             break;
         case '3':
+            EditAndUpdateContact();
+            break;
+        case '4':
             DeleteContact();
             break;
         case 88:

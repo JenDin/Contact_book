@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Xml.Linq;
 using Newtonsoft.Json;
 
 namespace ContactBook
@@ -29,8 +31,17 @@ namespace ContactBook
 			return _contacts;
 		}
 
-		// Get a specific contact by index
+		// Get all contacts with a specific name
+		public List<Person> GetContactsBySearch(string firstName)
+		{
+            var searchResult = new List<Person>();
 
+			searchResult = _contacts.Where(x => x.FirstName == firstName).ToList();
+
+			return searchResult;
+		}
+
+		// Get a specific contact by index
 		public Person GetContactByIndex(int index)
 		{
 			var person = _contacts[index];
