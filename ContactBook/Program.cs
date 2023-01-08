@@ -7,7 +7,7 @@ ContactDirectory contactDirectory = new ContactDirectory();
 while(true)
 {
     Console.Clear();
-    Console.WriteLine("* Tryck 1 för att söka upp upp kontakter efter förnamn");
+    Console.WriteLine("* Tryck 1 för att söka efter kontakter");
     Console.WriteLine("* Tryck 2 för att lägga till en ny kontakt");
     Console.WriteLine("* Tryck 3 för att redigera och uppdatera en kontakt");
     Console.WriteLine("* Tryck 4 för att radera en kontakt");
@@ -17,17 +17,21 @@ while(true)
 
     var contacts = contactDirectory.GetContacts();
 
-    if(contacts != null)
+    if(contacts.Any())
     {
         // Loop through the contact list
         foreach (var contact in contacts)
         {
             Console.WriteLine($"[{contacts.IndexOf(contact)}] - {contact}");
         }
+    } else
+    {
+        Console.WriteLine("Kontaktboken är tom");
     }
 
     int input = (int)Console.ReadKey(true).Key;
 
+    // Depending on input - call the corresponding function
     switch (input)
     {
         case '1':
@@ -48,19 +52,27 @@ while(true)
     }
 }
 
-// Get contacts by name
+// Loop through the contact list and print the search result
 void GetContactsByName()
 {
-    Console.WriteLine("Ange ett förnamn:");
+    Console.WriteLine("\nAnge ett förnamn:");
     string searchInput = Console.ReadLine();
     var people = contactDirectory.GetContactsByName(searchInput);
 
-    foreach (var person in people)
+    if (people.Any())
     {
-        Console.WriteLine($"Search result: {person.ToString()}");
+        foreach (var person in people)
+        {
+            Console.WriteLine(person.ToString());
+        }
+        Console.Read();
+    } else
+    {
+        Console.WriteLine($"\n{searchInput} finns inte i kontaktboken");
+        Console.Read();
     }
-    Console.Read();
 }
+
 
 /*
  * Add a new contact -
@@ -157,39 +169,49 @@ void EditAndUpdateContact()
 {
     Console.Clear();
     Console.WriteLine("Ange ett index på den kontakt som ska uppdateras:");
-    int indexToUpdate = Convert.ToInt32(Console.ReadLine());
-    var person = contactDirectory.GetContactByIndex(indexToUpdate);
-    Console.WriteLine();
-    Console.WriteLine($"{person}\n");
 
-    // First name
-    Console.WriteLine($"Förnamn: {person.FirstName}");
-    Console.Write("Nytt förnamn (valfritt): \n");
-    string firstName = Console.ReadLine();
+    try
+    {
+        int indexToUpdate = Convert.ToInt32(Console.ReadLine());
+        var person = contactDirectory.GetContactByIndex(indexToUpdate);
 
-    // Last name
-    Console.WriteLine($"Efternamn: {person.LastName}");
-    Console.Write("Nytt efternamn (valfritt): \n");
-    string lastName = Console.ReadLine();
+        Console.WriteLine();
+        Console.WriteLine($"{person}\n");
 
-    // Phone number
-    Console.WriteLine($"Telefonnummer: {person.PhoneNo}");
-    Console.Write("Nytt telefonnummer (valfritt): \n");
-    string phoneNo = Console.ReadLine();
+        // First name
+        Console.WriteLine($"Förnamn: {person.FirstName}");
+        Console.Write("Nytt förnamn (valfritt): \n");
+        string firstName = Console.ReadLine();
 
-    // Street name
-    Console.WriteLine($"Gatunamn: {person.Address.StreetName}");
-    Console.Write("Nytt gatunamn (valfritt): \n");
-    string streetName = Console.ReadLine();
+        // Last name
+        Console.WriteLine($"Efternamn: {person.LastName}");
+        Console.Write("Nytt efternamn (valfritt): \n");
+        string lastName = Console.ReadLine();
 
-    // Street number
-    Console.WriteLine($"Gatunummer: {person.Address.StreetNo}");
-    Console.Write("Nytt gatunummer (valfritt): \n");
-    string streetNo = Console.ReadLine();
+        // Phone number
+        Console.WriteLine($"Telefonnummer: {person.PhoneNo}");
+        Console.Write("Nytt telefonnummer (valfritt): \n");
+        string phoneNo = Console.ReadLine();
 
-    contactDirectory.UpdateContact(indexToUpdate, firstName, lastName, phoneNo, streetName, streetNo);
+        // Street name
+        Console.WriteLine($"Gatunamn: {person.Address.StreetName}");
+        Console.Write("Nytt gatunamn (valfritt): \n");
+        string streetName = Console.ReadLine();
 
-    Console.WriteLine(person);
+        // Street number
+        Console.WriteLine($"Gatunummer: {person.Address.StreetNo}");
+        Console.Write("Nytt gatunummer (valfritt): \n");
+        string streetNo = Console.ReadLine();
+
+        contactDirectory.UpdateContact(indexToUpdate, firstName, lastName, phoneNo, streetName, streetNo);
+
+        Console.WriteLine(person);
+    }
+    catch (ArgumentOutOfRangeException ex)
+    {
+        Console.WriteLine("Detta index existerar inte. Försök igen.");
+        Console.Read();
+    }
 }
 
 /*
@@ -197,7 +219,15 @@ void EditAndUpdateContact()
  */
 void DeleteContact()
 {
-    Console.WriteLine("Ange ett index på den kontakt som ska raderas:");
-    int indexToDelete = Convert.ToInt32(Console.ReadLine());
-    contactDirectory.DeleteContact(indexToDelete);
+    try
+    {
+        Console.WriteLine("Ange ett index på den kontakt som ska raderas:");
+        int indexToDelete = Convert.ToInt32(Console.ReadLine());
+        contactDirectory.DeleteContact(indexToDelete);
+    }
+    catch (FormatException ex)
+    {
+        Console.WriteLine("Var snäll fyll i ett giltigt index.");
+        Console.Read();
+    }
 }

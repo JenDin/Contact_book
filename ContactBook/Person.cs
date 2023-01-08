@@ -55,7 +55,7 @@ namespace ContactBook
         // Override the default output
         public override string ToString()
         {
-            var message = $"{FirstName} {LastName} // Tel: {PhoneNo} // Adress: {Address} ";
+            var message = $"{FirstName} {LastName} // Telefonnr: {PhoneNo} // Adress: {Address} ";
             return message;
         }
     }

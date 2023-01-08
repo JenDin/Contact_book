@@ -91,11 +91,12 @@ namespace ContactBook
 				SerializeAndSave();
 				return index;
 			}
-			catch (Exception ex)
-			{
+            catch (Exception ex)
+            {
                 Console.WriteLine("Detta index existerar inte. Försök igen.", ex);
+                Console.Read();
             }
-			return 0;
+            return 0;
 		}
 
         // Save and serialize JSON object
