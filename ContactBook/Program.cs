@@ -7,9 +7,11 @@ ContactDirectory contactDirectory = new ContactDirectory();
 while(true)
 {
     Console.Clear();
-    Console.WriteLine("* Tryck 1 för att söka efter kontakter");
-    Console.WriteLine("* Tryck 2 för att lägga till en ny kontakt");
-    Console.WriteLine("* Tryck 3 för att redigera och uppdatera en kontakt");
+    Console.WriteLine("Adressbok");
+    Console.WriteLine("------------------------------");
+    Console.WriteLine("* Tryck 1 för att lägga till en ny kontakt");
+    Console.WriteLine("* Tryck 2 för att redigera och uppdatera en kontakt");
+    Console.WriteLine("* Tryck 3 för att söka efter kontakter");
     Console.WriteLine("* Tryck 4 för att radera en kontakt");
     Console.WriteLine("* Tryck X för att avsluta programmet");
     Console.WriteLine("------------------------------");
@@ -26,7 +28,7 @@ while(true)
         }
     } else
     {
-        Console.WriteLine("Kontaktboken är tom");
+        Console.WriteLine("Adressboken är tom.");
     }
 
     int input = (int)Console.ReadKey(true).Key;
@@ -35,13 +37,13 @@ while(true)
     switch (input)
     {
         case '1':
-            GetContactsByName();
-            break;
-        case '2':
             AddNewContact();
             break;
-        case '3':
+        case '2':
             EditAndUpdateContact();
+            break;
+        case '3':
+            GetContactsByName();
             break;
         case '4':
             DeleteContact();
@@ -55,6 +57,7 @@ while(true)
 // Loop through the contact list and print the search result
 void GetContactsByName()
 {
+    Console.Clear();
     Console.WriteLine("\nAnge ett förnamn:");
     string searchInput = Console.ReadLine();
     var people = contactDirectory.GetContactsByName(searchInput);
@@ -68,7 +71,7 @@ void GetContactsByName()
         Console.Read();
     } else
     {
-        Console.WriteLine($"\n{searchInput} finns inte i kontaktboken");
+        Console.WriteLine($"\n{searchInput} finns inte i adressboken.");
         Console.Read();
     }
 }
@@ -81,7 +84,7 @@ void GetContactsByName()
 void AddNewContact()
 {
     // First name
-    Console.WriteLine("Förnamn:");
+    Console.Write("Förnamn: ");
     string firstName = Console.ReadLine();
     while(true)
     {
@@ -91,12 +94,12 @@ void AddNewContact()
         }
 
         Console.WriteLine("Du måste ange ett förnamn.");
-        Console.WriteLine("Förnamn:");
+        Console.Write("Förnamn: ");
         firstName = Console.ReadLine();
     }
 
     // Last name
-    Console.WriteLine("Efternamn:");
+    Console.Write("Efternamn: ");
     string lastName = Console.ReadLine();
     while (true)
     {
@@ -106,12 +109,12 @@ void AddNewContact()
         }
 
         Console.WriteLine("Du måste ange ett efternamn.");
-        Console.WriteLine("Efternamn:");
+        Console.Write("Efternamn: ");
         lastName = Console.ReadLine();
     }
 
     // Phone number
-    Console.WriteLine("Telefonnummer:");
+    Console.Write("Telefonnummer: ");
     string phoneNo = Console.ReadLine();
     while (true)
     {
@@ -121,12 +124,12 @@ void AddNewContact()
         }
 
         Console.WriteLine("Du måste ange ett telefonnummer.");
-        Console.WriteLine("Telefonnummer:");
+        Console.Write("Telefonnummer: ");
         phoneNo = Console.ReadLine();
     }
 
     // Street name
-    Console.WriteLine("Gatunamn:");
+    Console.Write("Gatunamn: ");
     string streetName = Console.ReadLine();
     while (true)
     {
@@ -136,12 +139,12 @@ void AddNewContact()
         }
 
         Console.WriteLine("Du måste ange ett gatunamn.");
-        Console.WriteLine("Gatunamn:");
+        Console.Write("Gatunamn: ");
         streetName = Console.ReadLine();
     }
 
     // Street number
-    Console.WriteLine("Gatunummer:");
+    Console.Write("Gatunummer: ");
     string streetNo = Console.ReadLine();
     while (true)
     {
@@ -151,7 +154,7 @@ void AddNewContact()
         }
 
         Console.WriteLine("Du måste ange ett gatunummer.");
-        Console.WriteLine("Gatunummer:");
+        Console.Write("Gatunummer: ");
         streetNo = Console.ReadLine();
     }
 
@@ -221,9 +224,25 @@ void DeleteContact()
 {
     try
     {
+        Console.Clear();
         Console.WriteLine("Ange ett index på den kontakt som ska raderas:");
         int indexToDelete = Convert.ToInt32(Console.ReadLine());
-        contactDirectory.DeleteContact(indexToDelete);
+        Console.WriteLine("Är du säker på att du vill radera denna kontakt? (Y/N)");
+        string deleteAnswer = Console.ReadLine();
+
+        // 
+        if(deleteAnswer == "Y" || deleteAnswer == "y")
+        {
+            contactDirectory.DeleteContact(indexToDelete);
+        } else if(deleteAnswer == "N" || deleteAnswer == "n")
+        {
+            Console.WriteLine("Tryck enter för att gå tillbaka.");
+            Console.Read();
+        } else
+        {
+            Console.WriteLine("Ogiltigt svar. Tryck enter för att försöka igen.");
+            Console.Read();
+        }
     }
     catch (FormatException ex)
     {
