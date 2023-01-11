@@ -7,14 +7,15 @@ ContactDirectory contactDirectory = new ContactDirectory();
 while(true)
 {
     Console.Clear();
-    Console.WriteLine("Adressbok");
-    Console.WriteLine("------------------------------");
+    Console.WriteLine("« Adressbok »");
+    Console.WriteLine("_____________ \n");
+    Console.WriteLine("✿ Meny ✿");
     Console.WriteLine("* Tryck 1 för att lägga till en ny kontakt");
     Console.WriteLine("* Tryck 2 för att redigera och uppdatera en kontakt");
     Console.WriteLine("* Tryck 3 för att söka efter kontakter");
     Console.WriteLine("* Tryck 4 för att radera en kontakt");
     Console.WriteLine("* Tryck X för att avsluta programmet");
-    Console.WriteLine("------------------------------");
+    Console.WriteLine("___________________________________________________ \n");
     Console.WriteLine("Kontaktlista:");
 
     var contacts = contactDirectory.GetContacts();
@@ -24,7 +25,7 @@ while(true)
         // Loop through the contact list
         foreach (var contact in contacts)
         {
-            Console.WriteLine($"[{contacts.IndexOf(contact)}] - {contact}");
+            Console.WriteLine($"[{contacts.IndexOf(contact)}] {contact}");
         }
     } else
     {
@@ -83,6 +84,7 @@ void GetContactsByName()
  */
 void AddNewContact()
 {
+    Console.Clear();
     // First name
     Console.Write("Förnamn: ");
     string firstName = Console.ReadLine();

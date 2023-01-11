@@ -3,11 +3,11 @@ namespace ContactBook
 {
 	public class Address
 	{
-        // Field members
+        // Properties
         public string StreetName { get; private set; }
         public string StreetNo { get; private set; }
 
-        // Constructor - validate field inputs
+        // Constructor - validate inputs and set them
         public Address(string streetName, string streetNo)
         {
             if (string.IsNullOrEmpty(streetName))

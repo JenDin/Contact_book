@@ -31,10 +31,10 @@ namespace ContactBook
 			return _contacts;
 		}
 
-		// Get all contacts with a specific name
+		// Search for contacts with a specific name
 		public List<Person> GetContactsByName(string firstName)
 		{
-            var searchResult = _contacts.Where(x => x.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase)).ToList();
+            var searchResult = _contacts.Where(person => person.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase)).ToList();
 
             return searchResult;
 		}
@@ -58,7 +58,8 @@ namespace ContactBook
 			catch (Exception ex)
 			{
 				Console.WriteLine("Det gick inte att lägga till denna kontakt. Försök igen.", ex);
-			}
+                Console.Read();
+            }
 
 			return null;
 		}
@@ -77,6 +78,7 @@ namespace ContactBook
 			catch (Exception ex)
 			{
                 Console.WriteLine("Det gick inte att uppdatera denna kontakt. Försök igen.", ex);
+                Console.Read();
             }
 
 			return null;

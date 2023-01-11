@@ -3,13 +3,13 @@ namespace ContactBook
 {
     public class Person
     {
-        // Field members
+        // Propeties
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public string PhoneNo { get; private set; }
         public Address Address { get; }
 
-        // Validate that each field member is set
+        // Constructor - validate inputs and set them
         public Person(string firstName, string lastName, string phoneNo, Address address)
         {
             if (string.IsNullOrEmpty(firstName))
@@ -55,7 +55,7 @@ namespace ContactBook
         // Override the default output
         public override string ToString()
         {
-            var message = $"{FirstName} {LastName} // Telefonnr: {PhoneNo} // Adress: {Address} ";
+            var message = $"{FirstName} {LastName} | Telefonnr: {PhoneNo} | Adress: {Address} ";
             return message;
         }
     }
