@@ -59,7 +59,7 @@ while(true)
 void GetContactsByName()
 {
     Console.Clear();
-    Console.WriteLine("\nAnge ett förnamn:");
+    Console.Write("Ange ett förnamn: ");
     string searchInput = Console.ReadLine();
     var people = contactDirectory.GetContactsByName(searchInput);
 
@@ -168,7 +168,6 @@ void AddNewContact()
 
 /*
  * Edit and update a contact
- * Keep prompting for an input if the field is left empty
  */
 void EditAndUpdateContact()
 {
